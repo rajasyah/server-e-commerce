@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { model, Schema } = mongoose;
 
-const categorySchema = Schema({
+const tagSchema = Schema({
   name: {
     type: String,
     minLength: [3, "Nama kategori minimal 3 karakter"],
@@ -10,4 +10,4 @@ const categorySchema = Schema({
   },
 });
 
-module.exports = model("Category", categorySchema);
+module.exports = model("Tag", tagSchema);

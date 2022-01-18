@@ -6,6 +6,7 @@ var logger = require("morgan");
 const cors = require("cors");
 const productRouter = require("./app/product/router");
 const categoriesRouter = require("./app/category/router");
+const tagRouter = require("./app/tag/router");
 
 var app = express();
 
@@ -22,6 +23,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/api", productRouter);
 app.use("/api", categoriesRouter);
+app.use("/api", tagRouter);
 
 // home
 app.use("/", function (req, res) {
