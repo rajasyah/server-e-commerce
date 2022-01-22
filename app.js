@@ -4,9 +4,15 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const cors = require("cors");
+const { decodeToken } = require("./middlewares");
 const productRouter = require("./app/product/router");
 const categoriesRouter = require("./app/category/router");
 const tagRouter = require("./app/tag/router");
+const authRouter = require("./app/auth/router");
+const deliveryAddressRouter = require("./app/deliveryAddress/router");
+const cartRouter = require("./app/cart/router");
+const orderRouter = require("./app/order/router");
+const invoiceRouter = require("./app/invoice/router");
 
 var app = express();
 
@@ -20,10 +26,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(decodeToken());
 
+app.use("/auth", authRouter);
 app.use("/api", productRouter);
 app.use("/api", categoriesRouter);
 app.use("/api", tagRouter);
+app.use("/api", tagRouter);
+app.use("/api", deliveryAddressRouter);
+app.use("/api", cartRouter);
+app.use("/api", orderRouter);
+app.use("/api", invoiceRouter);
 
 // home
 app.use("/", function (req, res) {
