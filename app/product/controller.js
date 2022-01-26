@@ -200,7 +200,7 @@ const index = async (req, res, next) => {
       }
     }
 
-    let count = await Product.find().countDocuments();
+    let count = await Product.find().countDocuments(criteria);
 
     let product = await Product.find(criteria)
       .skip(parseInt(skip))
