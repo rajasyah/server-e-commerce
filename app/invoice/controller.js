@@ -4,6 +4,11 @@ const { policyFor } = require("../../utils");
 
 const show = async (req, res, next) => {
   try {
+    let { order_id } = req.params;
+    let invoice = await Invoice.findOne({ order: order_id })
+      .populate("order")
+      .populate("user");
+
     let policy = policyFor(req.user);
     let subjectInvoice = subject("Invoice", {
       ...invoice,
@@ -16,16 +21,11 @@ const show = async (req, res, next) => {
       });
     }
 
-    let { order_id } = req.params;
-    let invoice = await Invoice.findOne({ order: order_id })
-      .populate("order")
-      .populate("user");
-
     return res.json(invoice);
   } catch (err) {
     return res.json({
       error: 1,
-      message: `Error when getting invoice`,
+      message: err.message,
     });
   }
 };

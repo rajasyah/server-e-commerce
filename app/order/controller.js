@@ -62,7 +62,7 @@ const index = async (req, res, next) => {
       .skip(parseInt(skip))
       .limit(parseInt(limit))
       .populate("order_items")
-      .sort("createdAt");
+      .sort("-createdAt");
 
     return res.json({
       data: orders.map((order) => order.toJSON({ virtuals: true })),

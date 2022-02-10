@@ -3,7 +3,7 @@ const { model, Schema } = mongoose;
 
 const deliveryAddressSchema = Schema(
   {
-    name: {
+    nama: {
       type: String,
       maxLength: [255, "Nama alamat maksimal 255 karakter"],
       required: [true, "nama alamat harus diisi"],
